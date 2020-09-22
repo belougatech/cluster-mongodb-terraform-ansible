@@ -1,0 +1,11 @@
+- hosts: mongodb
+  become: yes
+  become_user: root
+  roles:
+    - installation
+
+- hosts: mongodb_lead
+  become: yes
+  become_user: root
+  roles:
+    - initreplica

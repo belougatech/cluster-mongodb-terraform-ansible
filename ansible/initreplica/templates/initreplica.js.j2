@@ -1,0 +1,12 @@
+rs.initiate({
+  _id: "rs0",
+  version: 1,
+  members: [
+    {% for host in groups['mongodb'] %}
+    { _id: {{ loop.index }}, host : "{{ host }}:27017" },
+    {% endfor %}
+    ]
+  }
+)
+
+printjson(rs.status())

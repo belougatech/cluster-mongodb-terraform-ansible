@@ -1,0 +1,42 @@
+---
+# tasks file for installation
+
+- name: MongoDB - Import public key
+  apt_key:
+    url: https://www.mongodb.org/static/pgp/server-4.4.asc
+    state: present
+
+- name: MongoDB - Add repository
+  apt_repository:
+    repo: deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.4 multiverse
+    state: present
+    filename: mongodb-org-4.4.list
+    mode: '0666'
+
+- name: MongoDB - Install
+  apt:
+    name: mongodb-org
+    state: latest
+    update_cache: yes
+
+- name: MongoDB - Copy configuration file
+  template:
+    force: yes
+    src: mongod.conf.j2
+    dest: /etc/mongod.conf
+  notify: Start mongodb
+
+#- name: MongoDB - Create and change file ownership, group and permissions
+#  file:
+#    path: /data/db
+#    owner: root
+#    group: root
+#    mode: '0755'
+#    state: directory
+
+
+- name: MongoDB - Ensure mongodb is running and enabled to start automatically after reboots
+  systemd:
+    name: mongod
+    enabled: yes
+    state: started

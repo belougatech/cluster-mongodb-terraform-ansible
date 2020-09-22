@@ -1,0 +1,10 @@
+---
+# tasks file for initiating replica
+- name: MongoDB Lead -  copy file for initialization script
+  template:
+      src: initreplica.js.j2
+      dest: /tmp/initreplica.js
+      mode: '0666'
+
+- name: MongoDB Lead - Execute the initialization script and add all replicants
+  shell: mongo /tmp/initreplica.js
