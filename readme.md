@@ -10,7 +10,7 @@ The principle will be to create the infrastructure with Terraform:
 * 1 internal load balancer (which will create a healthcheck, a forwarding rule, some firewall rules behing the scene)
 *  and to build the inventory list for the next step
 
-Then, configure the nodes with Ansible by using 2 roles for$
+Then, configure the nodes with Ansible by using 2 roles for:
 * installing MongoDB  on all nodes
 * initialize the cluster on the leader node
 
@@ -21,5 +21,3 @@ The ingredients will be the following:
 - MongoDB 4.4
 
 Fore more details, you can check the tutorial on this [link](https://medium.com/@belougatech/create-a-mongodb-cluster-in-2-command-lines-with-gcp-terraform-ansible-6b706c2d57d)
-
-
